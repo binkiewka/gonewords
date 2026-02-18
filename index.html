@@ -275,11 +275,14 @@
     }
 
     .card:hover {
-      /* Lift effect instead of border color */
-      transform: translateY(-5px);
+      /* Grow effect instead of lift */
+      transform: scale(1.02);
       box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
       border-color: var(--border-s);
       /* Subtle border lighten only */
+      z-index: 2;
+      /* Ensure it grows on top of others */
+      position: relative;
     }
 
     /* Accent-left card variant */
@@ -335,9 +338,11 @@
     }
 
     .path-card:hover {
-      transform: translateY(-5px);
+      transform: scale(1.02);
       box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.6);
       border-color: var(--border-s);
+      z-index: 2;
+      position: relative;
     }
 
     .path-card h3 {
