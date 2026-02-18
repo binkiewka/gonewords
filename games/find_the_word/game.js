@@ -181,8 +181,8 @@ function renderGrid() {
             cell.addEventListener('mouseup', endSelection);
 
             // Touch events
+            // Touch events
             cell.addEventListener('touchstart', (e) => {
-                // e.preventDefault(); // Allow scrolling but handle tap
                 startSelection(e);
             }, {
                 passive: false
@@ -225,9 +225,19 @@ function getCellAt(row, col) {
     return gridContainer.children[row * gridSize + col];
 }
 
+// Debounce for touch/mouse hybrid devices
+let lastInteractionTime = 0;
+
 function startSelection(e) {
+    const now = Date.now();
+    if (now - lastInteractionTime < 300) return; // Ignore events within 300ms of each other
+    lastInteractionTime = now;
+
     const cell = getTargetCell(e);
     if (!cell) return;
+
+    // Prevent default to stop text selection/simulated clicks
+    if (e.cancelable) e.preventDefault();
 
     // If we have an anchor and click a distinct second cell, try to complete selection
     if (anchorCell && anchorCell !== cell && !isSelecting) {
@@ -246,9 +256,6 @@ function startSelection(e) {
     clearSelection();
     anchorCell = null; // Clear previous anchor if starting new drag
     selectCell(cell);
-
-    // Prevent default to stop text selection on mouse
-    if (e.type === 'mousedown') e.preventDefault();
 }
 
 function continueSelection(e) {
