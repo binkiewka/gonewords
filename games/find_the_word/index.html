@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Find the Word</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="game-container">
+        <h1>Find the Word</h1>
+        <p style="margin: 0; color: var(--muted); font-size: 14px; text-align: center;">Look for the words in the grid
+            below.<br>Drag or tap first and last letters to select.</p>
+        <div id="word-list" class="word-list"></div>
+        <div id="grid" class="grid-container"></div>
+        <div id="message" style="min-height: 24px; color: var(--accent);"></div>
+        <div class="controls">
+            <button id="new-game-btn" class="btn">New Puzzle</button>
+            <button id="mute-btn" class="btn">Mute</button>
+        </div>
+    </div>
+    <script src="word_library.js"></script>
+    <script src="game.js"></script>
+</body>
+
+</html>

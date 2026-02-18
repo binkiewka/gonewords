@@ -1,0 +1,160 @@
+:root {
+  --bg: #0d0b09;
+  --bg2: #110f0c;
+  --panel: #181410;
+  --text: #ede8e0;
+  --muted: #9e9488;
+  --accent: #8ec5a4;
+  --accent2: #d9c8a2;
+  --warm: #c4a97d;
+  --border: #2e2720;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  margin: 0;
+  color: var(--accent2);
+}
+
+.grid-container {
+  display: grid;
+  gap: 2px;
+  background: var(--panel);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  touch-action: none;
+}
+
+.cell {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.1s, color 0.1s;
+}
+
+.cell:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+
+.cell.selected {
+  background: var(--accent);
+  color: #0d0b09;
+}
+
+.cell.active-anchor {
+  background: var(--accent);
+  color: #0d0b09;
+  box-shadow: 0 0 0 2px var(--warm);
+}
+
+.cell.found {
+  background: var(--warm);
+  color: #0d0b09;
+  animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.word-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  max-width: 400px;
+}
+
+.word-item {
+  font-size: 14px;
+  color: var(--muted);
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.word-item:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.word-item.found {
+  text-decoration: line-through;
+  opacity: 0.5;
+  background: var(--bg2);
+  border-color: transparent;
+}
+
+.controls {
+  margin-top: 20px;
+}
+
+.btn {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.8);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .cell {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+}
