@@ -1,21 +1,48 @@
-const gridSize = 10;
+let gridSize = 8; // Default, will change per level
 let grid = [];
 let words = [];
 let selectedCells = [];
 let foundWords = [];
 let isSelecting = false;
-
 let anchorCell = null;
+let currentLevel = 1;
+
+const LEVELS = [
+    { grid: 8, words: 4 },   // Level 1
+    { grid: 9, words: 5 },   // Level 2
+    { grid: 10, words: 6 },  // Level 3
+    { grid: 11, words: 7 },  // Level 4
+    { grid: 12, words: 8 },  // Level 5
+    { grid: 13, words: 9 },  // Level 6
+    { grid: 14, words: 10 }  // Level 7+
+];
 
 const gridContainer = document.getElementById('grid');
 const wordListContainer = document.getElementById('word-list');
 const messageElement = document.getElementById('message');
 
-function initGame() {
-    console.log('Initializing game...');
-    // Select 6 random words
+function initGame(level = 1) {
+    console.log('Initializing game level ' + level);
+    currentLevel = level;
+
+    // Configure Level
+    const config = LEVELS[Math.min(currentLevel - 1, LEVELS.length - 1)];
+    gridSize = config.grid;
+    const wordCount = config.words;
+
+    // Update UI
+    document.getElementById('current-level').textContent = currentLevel;
+
+    // Show Game Container, Hide Screens
+    document.getElementById('game-container').classList.remove('hidden');
+    document.getElementById('title-screen').classList.remove('active');
+    document.getElementById('title-screen').style.display = 'none'; // Force hide
+    document.getElementById('level-screen').classList.remove('active');
+    document.getElementById('level-screen').style.display = 'none'; // Force hide
+
+    // Select words
     const shuffledWords = [...WORD_LIBRARY].sort(() => 0.5 - Math.random());
-    words = shuffledWords.slice(0, 6);
+    words = shuffledWords.slice(0, wordCount);
 
     grid = Array(gridSize).fill().map(() => Array(gridSize).fill(''));
     foundWords = [];
@@ -27,12 +54,6 @@ function initGame() {
     renderGrid();
     renderWordList();
     messageElement.textContent = 'Drag or tap first and last letters to select.';
-
-    // Start audio on first interaction if not already started
-    if (!AudioController.isInitialized) {
-        document.body.addEventListener('click', () => AudioController.startMusic(), { once: true });
-        document.body.addEventListener('touchstart', () => AudioController.startMusic(), { once: true });
-    }
 }
 
 const AudioController = {
@@ -50,7 +71,7 @@ const AudioController = {
     init() {
         if (this.isInitialized) return;
 
-        this.audioElement = new Audio();
+        this.audioElement = document.getElementById('bg-music') || new Audio();
         this.audioElement.loop = false;
         this.audioElement.volume = 0.4;
 
@@ -373,12 +394,28 @@ function markFound(word) {
     });
 
     if (foundWords.length === words.length) {
-        messageElement.textContent = "All words found. Well done.";
-        setTimeout(() => initGame(), 3000);
+        messageElement.textContent = "Level Complete!";
+        setTimeout(() => {
+            document.getElementById('game-container').classList.add('hidden');
+            const levelScreen = document.getElementById('level-screen');
+            levelScreen.style.display = 'flex'; // Force display
+            levelScreen.classList.add('active');
+        }, 1000);
     }
 }
 
-document.getElementById('new-game-btn').addEventListener('click', initGame);
+// Button Event Listeners
+document.getElementById('start-btn').addEventListener('click', () => {
+    AudioController.startMusic();
+    initGame(1);
+});
 
-// Start
-initGame();
+document.getElementById('next-level-btn').addEventListener('click', () => {
+    initGame(currentLevel + 1);
+});
+
+document.getElementById('restart-level-btn').addEventListener('click', () => {
+    initGame(currentLevel);
+});
+
+// Initial Load: Show Title Screen (Game is hidden by CSS default)
