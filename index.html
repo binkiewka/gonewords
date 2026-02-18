@@ -275,8 +275,8 @@
     }
 
     .card:hover {
-      border-color: var(--border-s);
-      background: var(--panel-2);
+      /* Remove background change, focus on border */
+      border-color: var(--accent);
     }
 
     /* Accent-left card variant */
@@ -285,9 +285,17 @@
       padding-left: 22px;
     }
 
+    .card.accent-left:hover {
+      border-color: var(--accent);
+    }
+
     .card.accent-warm {
       border-left: 3px solid var(--warm);
       padding-left: 22px;
+    }
+
+    .card.accent-warm:hover {
+      border-color: var(--warm);
     }
 
     .card h3 {
@@ -327,13 +335,28 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      transition: border-color .25s, background .25s;
+      transition: border-color .25s, transform .2s;
       text-align: center;
     }
 
     .path-card:hover {
-      border-color: var(--border-s);
-      background: var(--panel-2);
+      transform: translateY(-2px);
+    }
+
+    /* Distinct hover colors for paths using nth-child */
+    .path-card:nth-child(1):hover {
+      border-color: var(--accent);
+      /* Immediate support -> Sage */
+    }
+
+    .path-card:nth-child(2):hover {
+      border-color: var(--accent2);
+      /* Self-support -> Sand */
+    }
+
+    .path-card:nth-child(3):hover {
+      border-color: var(--accent3);
+      /* Ongoing care -> Blue */
     }
 
     .path-card h3 {
