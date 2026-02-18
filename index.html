@@ -270,13 +270,16 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 26px 24px;
-      transition: border-color .25s, background .25s;
+      transition: border-color .25s, background .25s, transform .2s, box-shadow .2s;
       text-align: center;
     }
 
     .card:hover {
-      /* Remove background change, focus on border */
-      border-color: var(--accent);
+      /* Lift effect instead of border color */
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      border-color: var(--border-s);
+      /* Subtle border lighten only */
     }
 
     /* Accent-left card variant */
@@ -285,17 +288,9 @@
       padding-left: 22px;
     }
 
-    .card.accent-left:hover {
-      border-color: var(--accent);
-    }
-
     .card.accent-warm {
       border-left: 3px solid var(--warm);
       padding-left: 22px;
-    }
-
-    .card.accent-warm:hover {
-      border-color: var(--warm);
     }
 
     .card h3 {
@@ -335,28 +330,14 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      transition: border-color .25s, transform .2s;
+      transition: transform .3s ease, box-shadow .3s ease, border-color .25s;
       text-align: center;
     }
 
     .path-card:hover {
-      transform: translateY(-2px);
-    }
-
-    /* Distinct hover colors for paths using nth-child */
-    .path-card:nth-child(1):hover {
-      border-color: var(--accent);
-      /* Immediate support -> Sage */
-    }
-
-    .path-card:nth-child(2):hover {
-      border-color: var(--accent2);
-      /* Self-support -> Sand */
-    }
-
-    .path-card:nth-child(3):hover {
-      border-color: var(--accent3);
-      /* Ongoing care -> Blue */
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.6);
+      border-color: var(--border-s);
     }
 
     .path-card h3 {
