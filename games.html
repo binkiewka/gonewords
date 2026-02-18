@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gone Words — Mind Games</title>
+    <style>
+        :root {
+            --bg: #0b0f14;
+            --panel: #121821;
+            --panel-2: #161f2b;
+            --text: #eef2f7;
+            --muted: #a3adbb;
+            --accent: #8ec5a4;
+            --accent2: #d9c8a2;
+            --accent3: #8fb4d9;
+            --border: #223044;
+            --danger: #ef4444;
+            --focus: #93c5fd;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui;
+            background: linear-gradient(180deg, #0b0f14, #0e1621);
+            color: var(--text);
+            line-height: 1.6
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .wrap {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 24px 20px 96px
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px
+        }
+
+        .logo {
+            font-weight: 800;
+            letter-spacing: .08em
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            color: #0b0f14;
+            font-weight: 800;
+            border: none;
+            cursor: pointer
+        }
+
+        .btn.ghost {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text)
+        }
+
+        .btn.link {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-weight: 600
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            transition: border-color .2s
+        }
+
+        .card:hover {
+            border-color: var(--accent)
+        }
+
+        .section {
+            margin-top: 24px
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        .grid {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))
+        }
+
+        .exit {
+            position: fixed;
+            bottom: 18px;
+            right: 18px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 999px;
+            padding: 10px 14px;
+            font-weight: 800;
+            cursor: pointer
+        }
+
+        .lowstim body,
+        .lowstim .card {
+            background: #0b0f14
+        }
+
+        .lowstim body {
+            background: #0b0f14
+        }
+
+        .game-card {
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .game-card .game-emoji {
+            font-size: 32px;
+            margin-bottom: 4px
+        }
+
+        .game-card h3 {
+            margin: 0
+        }
+
+        .game-card p {
+            margin: 0
+        }
+
+        /* Game modal overlay */
+        .game-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, .85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            transition: opacity .25s ease;
+        }
+
+        .game-modal.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .game-modal-inner {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: calc(100dvh - 32px);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, .6);
+        }
+
+        .game-modal iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .game-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: rgba(11, 15, 20, .8);
+            backdrop-filter: blur(6px);
+            color: var(--text);
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s, border-color .2s;
+        }
+
+        .game-modal-close:hover {
+            background: rgba(30, 40, 55, .9);
+            border-color: var(--accent);
+        }
+
+        @media(max-width:900px) {
+            .nav {
+                flex-direction: column;
+                align-items: flex-start
+            }
+
+            .game-modal {
+                padding: 0;
+            }
+
+            .game-modal-inner {
+                height: 100dvh;
+                border-radius: 0;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="nav">
+            <div class="logo">GONE WORDS</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <a class="btn ghost" href="index.html">← Back</a>
+                <button class="btn ghost" id="toggle">Low‑stim mode</button>
+            </div>
+        </div>
+
+        <div class="section card">
+            <h1>Mind games</h1>
+            <p class="muted">Relaxing games designed to help your mind unwind. Take a break, focus on something gentle,
+                and let your thoughts settle.</p>
+        </div>
+
+        <div class="section">
+            <div class="grid">
+                <div class="card game-card">
+                    <div class="game-emoji">🧶</div>
+                    <h3>Untangle Your Mind</h3>
+                    <p class="muted">A mindful puzzle — drag nodes to untangle the lines. No timer, no pressure, just
+                        focus.</p>
+                    <button class="btn link" data-game="games/untangle_your_mind/index.html"
+                        style="margin-top:auto">Play →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game modal overlay -->
+    <div class="game-modal" id="game-modal">
+        <div class="game-modal-inner">
+            <button class="game-modal-close" id="modal-close" title="Close game">✕</button>
+            <iframe id="game-iframe" title="Game"></iframe>
+        </div>
+    </div>
+
+    <button class="exit" onclick="window.location.href='https://www.google.com'">Quick exit</button>
+
+    <script>
+        const toggle = document.getElementById('toggle');
+        toggle?.addEventListener('click', () => document.body.classList.toggle('lowstim'));
+
+        // Game modal logic
+        const modal = document.getElementById('game-modal');
+        const iframe = document.getElementById('game-iframe');
+        const closeBtn = document.getElementById('modal-close');
+
+        function openGame(src) {
+            iframe.src = src;
+            modal.style.display = 'flex';
+            // Trigger reflow then add class for transition
+            requestAnimationFrame(() => {
+                modal.classList.add('open');
+            });
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGame() {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+            // Wait for fade-out, then remove iframe
+            setTimeout(() => {
+                modal.style.display = 'none';
+                iframe.src = '';
+            }, 250);
+        }
+
+        // Play buttons
+        document.querySelectorAll('[data-game]').forEach(btn => {
+            btn.addEventListener('click', () => openGame(btn.dataset.game));
+        });
+
+        // Close button
+        closeBtn.addEventListener('click', closeGame);
+
+        // Click outside to close
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeGame();
+        });
+
+        // Escape key to close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('open')) closeGame();
+        });
+    </script>
+</body>
+
+</html>

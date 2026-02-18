@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gone Words — Self&#x2011;support Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0b09;
+      --bg2: #110f0c;
+      --panel: #181410;
+      --panel-2: #1e1a15;
+      --text: #ede8e0;
+      --muted: #9e9488;
+      --accent: #8ec5a4;
+      --accent2: #d9c8a2;
+      --accent3: #8fb4d9;
+      --warm: #c4a97d;
+      --border: #2e2720;
+      --border-s: #3d3228;
+      --danger: #c0392b;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(196, 169, 125, 0.06) 0%, transparent 70%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 28px 24px 120px
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      opacity: 0.9;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #0d0b09;
+      font-weight: 700;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      transition: opacity .2s, transform .15s;
+    }
+
+    .btn:hover {
+      opacity: 0.88;
+      transform: translateY(-1px)
+    }
+
+    .btn.ghost {
+      background: transparent;
+      border: 1px solid var(--border-s);
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .btn.ghost:hover {
+      border-color: var(--warm);
+      color: var(--text)
+    }
+
+    .btn.link {
+      background: transparent;
+      border: 1px solid var(--border-s);
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .btn.link:hover {
+      border-color: var(--accent);
+      color: var(--accent)
+    }
+
+    .page-header {
+      margin-top: 32px;
+      padding: 36px 32px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      border-left: 3px solid var(--accent);
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--warm);
+      opacity: 0.8;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 600;
+      margin: 0 0 10px;
+      line-height: 1.2;
+    }
+
+    .page-header p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 15px
+    }
+
+    .section {
+      margin-top: 40px
+    }
+
+    .section h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(20px, 2.2vw, 26px);
+      font-weight: 600;
+      margin: 0 0 20px;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px 24px;
+      transition: border-color .25s, background .25s;
+      text-align: center;
+    }
+
+    .card:hover {
+      border-color: var(--border-s);
+      background: var(--panel-2)
+    }
+
+    .card.accent-left {
+      border-left: 3px solid var(--accent);
+      padding-left: 22px
+    }
+
+    .card b {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 16px;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 14px
+    }
+
+    /* GP script card */
+    .script-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px 24px;
+    }
+
+    .script-card h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 600;
+      margin: 0 0 12px;
+    }
+
+    .script-card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      margin: 0 0 16px;
+    }
+
+    /* Details / accordion */
+    details {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      background: var(--panel-2);
+      transition: border-color .25s;
+    }
+
+    details:hover {
+      border-color: var(--border-s)
+    }
+
+    details summary {
+      cursor: pointer;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 16px;
+      font-weight: 600;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details summary::after {
+      content: '+';
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--warm);
+      transition: transform .2s;
+    }
+
+    details[open] summary::after {
+      content: '−'
+    }
+
+    details p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 12px 0 0;
+      line-height: 1.7;
+    }
+
+    .muted {
+      color: var(--muted)
+    }
+
+    .exit {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--danger);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      z-index: 900;
+      transition: opacity .2s;
+    }
+
+    .exit:hover {
+      opacity: 0.85
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start
+      }
+    }
+
+    @media (max-width: 560px) {
+      .wrap {
+        padding: 20px 16px 100px
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none;
+        animation: none
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <nav class="nav" aria-label="Main navigation">
+      <div class="logo">Gone Words</div>
+      <div class="nav-links">
+        <a class="btn ghost" href="index.html">← Back</a>
+      </div>
+    </nav>
+
+    <div class="page-header">
+      <div class="section-label">At your own pace</div>
+      <h1>Self&#x2011;support tools</h1>
+      <p>Small steps that can help your nervous system settle and make the next step easier.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Techniques</div>
+      <h2>Things you can try right now</h2>
+      <div class="grid">
+        <div class="card accent-left">
+          <b>Grounding (2&#x2011;2&#x2011;2)</b>
+          <p class="muted">Name 2 things you can see, 2 you can feel, 2 you can hear.</p>
+        </div>
+        <div class="card accent-left">
+          <b>Breathing (4&#x2011;6)</b>
+          <p class="muted">Breathe in for 4 counts, out for 6. Repeat 6 times.</p>
+        </div>
+        <div class="card accent-left">
+          <b>Micro&#x2011;steps</b>
+          <p class="muted">Pick one tiny thing: drink water, open a window, text a friend.</p>
+        </div>
+        <div class="card accent-left">
+          <b>Trigger plan</b>
+          <p class="muted">Write 3 early warning signs and 3 actions that help you.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="script-card">
+        <h2>Quick GP script</h2>
+        <p id="gp-script">Hi, I'm struggling with my mental health and it's affecting my day&#x2011;to&#x2011;day. I'm
+          experiencing [symptoms]. I need help with [support/therapy/meds] and I'd like to discuss next steps.</p>
+        <button class="btn link" id="copy-script">Copy script</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">When it's hard</div>
+      <h2>A little more help</h2>
+      <details>
+        <summary>When it's hard to start</summary>
+        <p>Write a 1&#x2011;sentence note: "Today I feel ___. I need ___." That's enough to begin.</p>
+      </details>
+    </div>
+
+  </div>
+
+  <button class="exit" onclick="window.location.href='https://www.google.com'">Quick exit</button>
+
+  <script>
+
+    const copy = document.getElementById('copy-script');
+    const script = document.getElementById('gp-script');
+    copy?.addEventListener('click', async () => {
+      if (!script) return;
+      try {
+        await navigator.clipboard.writeText(script.textContent || '');
+        copy.textContent = 'Copied ✓';
+        setTimeout(() => (copy.textContent = 'Copy script'), 1500);
+      } catch (e) {
+        copy.textContent = 'Copy failed';
+        setTimeout(() => (copy.textContent = 'Copy script'), 1500);
+      }
+    });
+  </script>
+</body>
+
+</html>

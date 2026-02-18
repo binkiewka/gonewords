@@ -1,0 +1,411 @@
+/* ========================================
+   Uncross the Leylines — Styles
+   Dark cosmic zen theme
+   ======================================== */
+
+:root {
+    --bg-deep: #0a0a1a;
+    --bg-mid: #0f0f2e;
+    --bg-panel: rgba(20, 18, 50, 0.75);
+    --bg-panel-hover: rgba(35, 30, 80, 0.85);
+    --border-glow: rgba(120, 100, 255, 0.25);
+
+    --accent-primary: #8b7aff;
+    --accent-secondary: #5de8c5;
+    --accent-warm: #ff7eb3;
+    --accent-gold: #ffd56b;
+
+    --text-primary: #e8e4f5;
+    --text-secondary: rgba(200, 195, 225, 0.7);
+    --text-dim: rgba(180, 170, 210, 0.45);
+
+    --edge-crossed: #ff5c6a;
+    --edge-uncrossed: #4ae8c4;
+    --edge-glow-crossed: rgba(255, 92, 106, 0.35);
+    --edge-glow-uncrossed: rgba(74, 232, 196, 0.25);
+
+    --node-fill: #a78bfa;
+    --node-stroke: #c4b5fd;
+    --node-hover: #ddd6fe;
+    --node-drag: #fbbf24;
+
+    --font-primary: 'Outfit', 'Inter', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+
+    --transition-fast: 0.18s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* ---- Reset & Base ---- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --font-main: 'Outfit', sans-serif;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg-deep);
+    font-family: var(--font-main);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- Canvas Layers ---- */
+#bgCanvas,
+#gameCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#bgCanvas {
+    z-index: 0;
+}
+
+#gameCanvas {
+    z-index: 1;
+    cursor: default;
+}
+
+/* ---- UI Overlay ---- */
+#ui-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-slow), visibility var(--transition-slow);
+    pointer-events: none;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Title and win screens capture full clicks (cover the canvas) */
+#title-screen.active {
+    pointer-events: auto;
+}
+
+#win-screen {
+    background: rgba(10, 10, 26, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+#win-screen.active {
+    pointer-events: auto;
+}
+
+/* Game HUD must NOT block the canvas — only buttons are interactive */
+#game-hud.active {
+    pointer-events: none;
+}
+
+/* ---- Title Screen ---- */
+.title-container {
+    text-align: center;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.game-title {
+    font-family: var(--font-primary);
+    font-weight: 300;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 0.5em;
+    text-shadow: 0 0 40px rgba(139, 122, 255, 0.3);
+}
+
+.game-title .accent {
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+    color: var(--text-secondary);
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 3em;
+}
+
+/* ---- Difficulty Buttons ---- */
+.difficulty-selector {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.diff-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4em;
+    padding: 1.4em 2em;
+    min-width: 140px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-glow);
+    border-radius: var(--radius-lg);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-family: var(--font-body);
+    position: relative;
+    overflow: hidden;
+}
+
+.diff-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(139, 122, 255, 0.08), rgba(93, 232, 197, 0.05));
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.diff-btn:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(139, 122, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.diff-btn:hover::before {
+    opacity: 1;
+}
+
+.diff-btn:active {
+    transform: translateY(-1px);
+}
+
+.diff-icon {
+    font-size: 1.3em;
+    color: var(--accent-primary);
+    letter-spacing: 0.1em;
+}
+
+.diff-label {
+    font-family: var(--font-primary);
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.diff-desc {
+    font-size: 0.78em;
+    color: var(--text-dim);
+    font-weight: 400;
+}
+
+/* ---- Game HUD ---- */
+#game-hud {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem;
+}
+
+.hud-top {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 500px;
+}
+
+.hud-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2em;
+    padding: 0.6em 1.4em;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-glow);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    min-width: 90px;
+    pointer-events: auto;
+}
+
+.hud-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    font-weight: 500;
+}
+
+.hud-value {
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+}
+
+#crossing-counter {
+    transition: color var(--transition-fast);
+}
+
+.hud-bottom {
+    display: flex;
+    gap: 0.6rem;
+    pointer-events: auto;
+}
+
+.hud-btn {
+    padding: 0.6em 1.4em;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-glow);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.hud-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--accent-primary);
+    background: var(--bg-panel-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 122, 255, 0.15);
+}
+
+/* ---- Win Screen ---- */
+.win-container {
+    text-align: center;
+    animation: fadeInUp 0.6s ease-out;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-glow);
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.win-title {
+    font-family: var(--font-primary);
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 300;
+    color: var(--accent-secondary);
+    margin-bottom: 0.4em;
+    text-shadow: 0 0 30px rgba(93, 232, 197, 0.4);
+}
+
+.win-stats {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 2em;
+}
+
+.win-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.win-btn {
+    min-width: 160px;
+}
+
+.win-btn.secondary {
+    opacity: 0.7;
+}
+
+.win-btn.secondary:hover {
+    opacity: 1;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 600px) {
+    .difficulty-selector {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .diff-btn {
+        min-width: 200px;
+        padding: 1.1em 1.6em;
+    }
+
+    .hud-top {
+        gap: 0.5rem;
+    }
+
+    .hud-panel {
+        padding: 0.5em 1em;
+        min-width: 75px;
+    }
+
+    .hud-value {
+        font-size: 1.2rem;
+    }
+
+    .hud-btn {
+        padding: 0.5em 1em;
+        font-size: 0.8rem;
+    }
+}
