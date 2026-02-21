@@ -16,16 +16,27 @@
 <body>
     <!-- Title Screen -->
     <div id="title-screen" class="screen active">
-        <h1>Find the Word</h1>
-        <p>A relaxing word search journey.<br>Discover words to untangle your mind.</p>
-        <button id="start-btn" class="start-btn">Start Journey</button>
+        <div class="title-container">
+            <h1 class="game-title">Find the<br><span class="accent">Word</span></h1>
+            <p class="subtitle">A relaxing word search journey</p>
+            <button id="start-btn" class="start-btn diff-btn">
+                <span class="diff-label">Start Journey</span>
+            </button>
+        </div>
     </div>
 
     <!-- Level Complete Screen -->
     <div id="level-screen" class="screen">
-        <h1>Level Complete</h1>
-        <p>Wonderful. Ready for the next challenge?</p>
-        <button id="next-level-btn" class="next-level-btn">Next Level</button>
+        <div class="win-container">
+            <h2 class="win-title">✨ Complete ✨</h2>
+            <p class="win-stats">Ready for the next challenge?</p>
+            <div class="win-buttons">
+                <button id="next-level-btn" class="diff-btn win-btn">
+                    <span class="diff-icon">→</span>
+                    <span class="diff-label">Next Level</span>
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- Game Container (Hidden initially) -->

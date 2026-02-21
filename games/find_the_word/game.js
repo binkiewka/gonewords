@@ -97,7 +97,7 @@ const AudioController = {
         this.audioElement.src = this.tracks[this.currentTrackIdx];
 
         if (!this.isMuted) {
-            this.audioElement.play().catch(e => console.log("Audio play failed:", e));
+            this.audioElement.play().catch(e => console.log("Audio play failed, likely needs interaction"));
         }
     },
 
@@ -105,7 +105,7 @@ const AudioController = {
         if (!this.isInitialized) this.init();
         if (this.audioElement.paused) {
             this.audioElement.src = this.tracks[this.currentTrackIdx];
-            this.audioElement.play().catch(e => console.log("Audio play failed:", e));
+            this.audioElement.play().catch(e => console.log("Audio play failed on start:", e));
         }
     },
 

@@ -88,11 +88,19 @@
 
     /* ── Nav ─────────────────────────────────────────────── */
     .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      padding-bottom: 4px;
+      padding: 16px 24px;
+      margin: -28px -24px 28px -24px;
+      background: rgba(13, 11, 9, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
     }
 
     .logo {
@@ -664,6 +672,7 @@
       <div class="nav-links">
         <a class="btn ghost" href="#start">Start here</a>
         <a class="btn ghost" href="#paths">Support paths</a>
+        <a class="btn ghost" href="#games">Games</a>
       </div>
     </nav>
 
@@ -791,6 +800,14 @@
           <p class="muted">A gentle word search to help you focus. Look for calm.</p>
           <div style="margin-top:6px">
             <button class="btn link" data-game="games/find_the_word/index.html">Play &#x2192;</button>
+          </div>
+        </div>
+        <div class="card game-card">
+          <div class="game-emoji">&#x1F522;</div>
+          <h3>Numbers Game</h3>
+          <p class="muted">A reassuring calculation challenge. Combine numbers to find the exact target.</p>
+          <div style="margin-top:6px">
+            <button class="btn link" data-game="games/countdown/index.html">Play &#x2192;</button>
           </div>
         </div>
       </div>
