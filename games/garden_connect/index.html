@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Garden Connect — Gone Words</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="wrap">
+        <header class="header">
+            <h1 class="title">Garden Connect</h1>
+            <div class="level-indicator">Level <span id="level-text">1</span></div>
+        </header>
+
+        <div class="game-container">
+            <div id="grid" class="grid-board"></div>
+        </div>
+
+        <div class="controls">
+            <button id="btn-undo" class="btn ghost">Undo</button>
+            <div class="meta-progress">
+                <div class="progress-track" id="progress-track"></div>
+            </div>
+            <button id="btn-mute" class="btn ghost">Mute</button>
+        </div>
+
+        <div id="mode-overlay" class="overlay">
+            <div class="title-container">
+                <div class="game-icon">🌿</div>
+                <h1 class="game-title">Garden <span class="title-accent">Connect</span></h1>
+                <p class="subtitle">A calm flow puzzle. Rotate tiles to connect water to the plants.</p>
+                <div class="mode-buttons intro-buttons">
+                    <button id="btn-easy" class="btn ghost diff-btn">
+                        <span class="diff-label">Easy</span>
+                        <span class="diff-desc">3x3 to 5x5</span>
+                    </button>
+                    <button id="btn-normal" class="btn primary diff-btn">
+                        <span class="diff-label">Normal</span>
+                        <span class="diff-desc">4x4 to 6x6</span>
+                    </button>
+                    <button id="btn-hard" class="btn ghost diff-btn">
+                        <span class="diff-label">Hard</span>
+                        <span class="diff-desc">5x5 to 7x7</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="success-overlay" class="overlay hidden">
+            <div class="overlay-content">
+                <h2>Garden Flourishing</h2>
+                <p>The plants are happy.</p>
+                <button id="btn-next" class="btn primary">Next Puzzle</button>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="description"
+        content="Pattern Ripple — A calm puzzle game. Tap a pond to create ripples and match a target pattern of ripple intersections.">
+    <title>Pattern Ripple</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="ui-overlay">
+        <!-- Title Screen -->
+        <div id="title-screen" class="screen active">
+            <div class="title-container">
+                <h1 class="game-title">Pattern<br><span class="accent">Ripple</span></h1>
+                <p class="subtitle">A meditative intersection puzzle</p>
+                <div class="difficulty-selector">
+                    <button class="diff-btn" data-difficulty="easy">
+                        <span class="diff-icon">💧</span>
+                        <span class="diff-label">Easy</span>
+                        <span class="diff-desc">2 taps</span>
+                    </button>
+                    <button class="diff-btn" data-difficulty="medium">
+                        <span class="diff-icon">💧💧</span>
+                        <span class="diff-label">Medium</span>
+                        <span class="diff-desc">3 taps</span>
+                    </button>
+                    <button class="diff-btn" data-difficulty="hard">
+                        <span class="diff-icon">💧💧💧</span>
+                        <span class="diff-label">Hard</span>
+                        <span class="diff-desc">4 taps</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- In-Game HUD -->
+        <div id="game-hud" class="screen">
+            <div class="hud-top">
+                <div class="hud-panel hud-left">
+                    <span class="hud-label">Level</span>
+                    <span id="level-counter" class="hud-value">1</span>
+                </div>
+                <div id="target-example" class="hud-panel">
+                    <span class="hud-label">Target</span>
+                    <canvas id="targetCanvas" width="120" height="120"></canvas>
+                </div>
+            </div>
+            <div class="hud-bottom">
+                <button id="btn-undo" class="hud-btn">Undo</button>
+                <button id="btn-pause" class="hud-btn">Pause</button>
+                <button id="btn-reset" class="hud-btn">Reset</button>
+                <button id="btn-menu" class="hud-btn">Menu</button>
+                <button id="btn-mute" class="hud-btn">Mute</button>
+            </div>
+        </div>
+
+        <!-- Win Screen -->
+        <div id="win-screen" class="screen">
+            <div class="win-container">
+                <h2 class="win-title">✨ Harmonized ✨</h2>
+                <div class="win-buttons">
+                    <button id="btn-next" class="diff-btn win-btn">
+                        <span class="diff-icon">→</span>
+                        <span class="diff-label">Next Pond</span>
+                    </button>
+                    <button id="btn-win-menu" class="diff-btn win-btn secondary">
+                        <span class="diff-icon">⌂</span>
+                        <span class="diff-label">New Game</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="bg-music"></audio>
+    <script src="game.js"></script>
+</body>
+
+</html>

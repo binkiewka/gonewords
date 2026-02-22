@@ -1,0 +1,333 @@
+:root {
+    /* Calm, warm dark colors matching Gone Words theme */
+    --bg: #0d0b09;
+    --panel: #181410;
+    --text: #ede8e0;
+    --muted: #9e9488;
+    --accent: #8ec5a4;
+    --accent-glow: rgba(142, 197, 164, 0.4);
+    --plant-base: #c4a97d;
+    --plant-bloom: #8ec5a4;
+    --border: #2e2720;
+    --tile-bg: #1e1a15;
+    --tile-hover: #2e2720;
+    --path-empty: #3d3228;
+    --path-filled: var(--accent);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(196, 169, 125, 0.06) 0%, transparent 70%),
+        linear-gradient(180deg, var(--bg) 0%, #110f0c 100%);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.wrap {
+    width: 100%;
+    max-width: 500px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text);
+    letter-spacing: -0.02em;
+}
+
+.level-indicator {
+    background: var(--panel);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    color: var(--muted);
+}
+
+.game-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-board {
+    display: grid;
+    gap: 8px;
+    background: var(--panel);
+    padding: 16px;
+    border-radius: 24px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04);
+}
+
+.tile {
+    width: 64px;
+    height: 64px;
+    background: var(--tile-bg);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.tile:active {
+    background: var(--tile-hover);
+    transform: scale(0.95);
+}
+
+/* SVG Path Styling */
+.pipe-path {
+    fill: none;
+    stroke: var(--path-empty);
+    stroke-width: 12;
+    stroke-linecap: round;
+    transition: stroke 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pipe-path.filled {
+    stroke: var(--path-filled);
+    filter: drop-shadow(0 0 6px var(--accent-glow));
+}
+
+.source-node {
+    fill: var(--accent);
+}
+
+.plant-node {
+    fill: var(--plant-base);
+    transition: fill 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.plant-node.bloomed {
+    fill: var(--plant-bloom);
+}
+
+/* Controls */
+.controls {
+    margin-top: 32px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn {
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn.primary {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 8px 16px var(--accent-glow);
+}
+
+.btn.primary:hover {
+    transform: translateY(-2px);
+    background: #5eac86;
+}
+
+.btn.ghost {
+    background: transparent;
+    border: 2px solid var(--border);
+    color: var(--muted);
+}
+
+.btn.ghost:hover {
+    background: var(--panel);
+    color: var(--text);
+    border-color: var(--accent);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.meta-progress {
+    flex: 1;
+    margin: 0 24px;
+    height: 8px;
+    background: var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-track {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Overlay */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(13, 11, 9, 0.9);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.overlay:not(.hidden) {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.overlay-content {
+    background: var(--panel);
+    padding: 32px 40px;
+    border-radius: 24px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.overlay:not(.hidden) .overlay-content {
+    transform: translateY(0);
+}
+
+.title-container {
+    text-align: center;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.game-icon {
+    font-size: 3rem;
+    margin-bottom: 0.2em;
+}
+
+.game-title {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 300;
+    font-size: clamp(2.5rem, 7vw, 4rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 0.3em;
+}
+
+.game-title .title-accent {
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.subtitle {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    margin-bottom: 3em;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mode-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.intro-buttons {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.mode-buttons .btn {
+    width: 100%;
+}
+
+.intro-buttons .diff-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4em;
+    padding: 1.4em 2em;
+    min-width: 140px;
+    height: auto;
+    width: auto;
+}
+
+.diff-label {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.diff-desc {
+    font-size: 0.8em;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+    .intro-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .intro-buttons .diff-btn {
+        min-width: 200px;
+        width: 100%;
+        padding: 1.1em 1.6em;
+    }
+}
