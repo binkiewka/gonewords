@@ -27,7 +27,7 @@ A calm, practical, and trauma-informed digital space designed to help users reco
 ├── tools.html        # Self-support tools
 ├── services.html     # Service directory
 ├── stories.html      # Lived experience stories
-├── games.html        # Games listing
+
 ├── hero-bg.png       # Hero section background image
 └── games/            # Game logic and assets
     └── untangle_your_mind/

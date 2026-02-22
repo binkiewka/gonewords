@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Garden Breath Sudoku</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- Game Header -->
+        <header class="game-header hidden" id="game-header">
+            <div class="header-left">
+                <button id="btn-menu" class="icon-btn" aria-label="Main Menu">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                        <path d="M3 12h18M3 6h18M3 18h18"></path>
+                    </svg>
+                </button>
+                <h1 class="header-title">Garden Breath</h1>
+            </div>
+            <div class="header-right">
+                <button id="btn-audio" class="icon-btn" aria-label="Toggle Audio">
+                    <svg id="icon-audio-on" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                        stroke-width="2" fill="none">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                    <svg id="icon-audio-off" class="hidden" viewBox="0 0 24 24" width="24" height="24"
+                        stroke="currentColor" stroke-width="2" fill="none">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <line x1="23" y1="1" x2="1" y2="23"></line>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Game Area -->
+        <main class="game-area hidden" id="game-area">
+
+            <div class="board-container">
+                <div id="sudoku-board" class="sudoku-board">
+                    <!-- Javascript will populate 81 cells here -->
+                </div>
+            </div>
+
+            <div class="controls-container">
+                <div class="action-buttons">
+                    <button id="btn-undo" class="action-btn text-btn">Undo</button>
+                    <button id="btn-erase" class="action-btn text-btn">Erase</button>
+                    <button id="btn-notes" class="action-btn text-btn toggleable">Notes: Off</button>
+                    <button id="btn-hint" class="action-btn text-btn">Hint</button>
+                </div>
+
+                <div class="numpad">
+                    <button class="numpad-btn" data-val="1">1</button>
+                    <button class="numpad-btn" data-val="2">2</button>
+                    <button class="numpad-btn" data-val="3">3</button>
+                    <button class="numpad-btn" data-val="4">4</button>
+                    <button class="numpad-btn" data-val="5">5</button>
+                    <button class="numpad-btn" data-val="6">6</button>
+                    <button class="numpad-btn" data-val="7">7</button>
+                    <button class="numpad-btn" data-val="8">8</button>
+                    <button class="numpad-btn" data-val="9">9</button>
+                </div>
+            </div>
+
+            <!-- Twists Containers -->
+            <div id="garden-strip" class="garden-strip hidden">
+                <!-- Garden items bloom here -->
+            </div>
+
+            <div id="breath-ring-container" class="breath-ring-container hidden">
+                <div class="breath-ring">
+                    <div class="breath-indicator"></div>
+                    <div class="breath-label">Exhale</div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Intro Overlay -->
+        <div id="intro-overlay" class="overlay">
+            <div class="intro-card">
+                <h1 class="game-title">Garden <span class="title-accent">Breath</span></h1>
+                <p class="subtitle">A calm logic puzzle. Choose your flow.</p>
+
+                <div class="settings-group">
+                    <h3 class="group-label">Optional Twists</h3>
+                    <div class="difficulty-options">
+                        <button class="diff-btn active" id="btn-twist-garden">Garden Bloom</button>
+                        <button class="diff-btn" id="btn-twist-breath">Breath-Lock</button>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3 class="group-label">Difficulty</h3>
+                    <div class="difficulty-options">
+                        <button class="diff-btn active" data-diff="easy">Easy</button>
+                        <button class="diff-btn" data-diff="medium">Medium</button>
+                        <button class="diff-btn" data-diff="hard">Hard</button>
+                    </div>
+                </div>
+
+                <button id="btn-start" class="btn primary-btn">Start Journey</button>
+            </div>
+        </div>
+
+        <!-- Success Overlay -->
+        <div id="success-overlay" class="overlay hidden">
+            <div class="success-card">
+                <h2>Tranquility Achieved</h2>
+                <div id="final-stats" class="final-stats"></div>
+                <button id="btn-next" class="btn primary-btn">Next Puzzle</button>
+            </div>
+        </div>
+
+    </div>
+
+    <audio id="bg-music"></audio>
+    <script src="game.js"></script>
+</body>
+
+</html>
