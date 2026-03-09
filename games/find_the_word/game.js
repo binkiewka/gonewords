@@ -213,12 +213,9 @@ function renderGrid() {
         }
     }
 
-    // Global event listeners for ending selection outside grid
-    document.addEventListener('mouseup', endSelection);
     gridContainer.addEventListener('touchmove', handleTouchMove, {
         passive: false
     });
-    document.addEventListener('touchend', endSelection);
 }
 
 function renderWordList() {
@@ -260,7 +257,7 @@ function startSelection(e) {
     // Prevent default to stop text selection/simulated clicks
     if (e.cancelable) e.preventDefault();
 
-    // If we have an anchor and click a distinct second cell, try to complete selection
+    // If we have an anchor and click/tap a distinct second cell, try to complete selection
     if (anchorCell && anchorCell !== cell && !isSelecting) {
         const lineCells = getLineCells(anchorCell, cell);
         if (lineCells) {
@@ -268,6 +265,8 @@ function startSelection(e) {
             lineCells.forEach(c => selectCell(c));
             checkWord();
             anchorCell = null;
+            isSelecting = false; // ensure endSelection won't double-fire
+            clearSelection();
             return;
         }
     }
@@ -417,5 +416,9 @@ document.getElementById('next-level-btn').addEventListener('click', () => {
 document.getElementById('restart-level-btn').addEventListener('click', () => {
     initGame(currentLevel);
 });
+
+// Global pointer-up listeners — added once only (not per renderGrid)
+document.addEventListener('mouseup', endSelection);
+document.addEventListener('touchend', endSelection);
 
 // Initial Load: Show Title Screen (Game is hidden by CSS default)
