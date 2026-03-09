@@ -243,38 +243,40 @@ function getCellAt(row, col) {
     return gridContainer.children[row * gridSize + col];
 }
 
-// Debounce for touch/mouse hybrid devices
-let lastInteractionTime = 0;
+
+let isTouchDevice = false;
 
 function startSelection(e) {
-    const now = Date.now();
-    if (now - lastInteractionTime < 300) return; // Ignore events within 300ms of each other
-    lastInteractionTime = now;
+    // Track if this is a touch device and prevent synthetic mouse events
+    if (e.type === 'touchstart') {
+        isTouchDevice = true;
+        if (e.cancelable) e.preventDefault(); // blocks synthetic mousedown/click
+    }
+    // On touch devices, skip mouse events entirely to avoid double-firing
+    if (isTouchDevice && e.type === 'mousedown') return;
 
     const cell = getTargetCell(e);
     if (!cell) return;
 
-    // Prevent default to stop text selection/simulated clicks
-    if (e.cancelable) e.preventDefault();
-
-    // If we have an anchor and click/tap a distinct second cell, try to complete selection
+    // Tap-tap mode: if there's an anchor and this is a different cell, complete the selection
     if (anchorCell && anchorCell !== cell && !isSelecting) {
         const lineCells = getLineCells(anchorCell, cell);
         if (lineCells) {
             clearSelection();
             lineCells.forEach(c => selectCell(c));
-            checkWord();
+            checkWord();   // markFound() handles highlighting; clearSelection() runs after if no match
             anchorCell = null;
-            isSelecting = false; // ensure endSelection won't double-fire
-            clearSelection();
+            isSelecting = false;
+            clearSelection(); // safe: found cells already have 'found' class, not 'selected'
             return;
         }
+        // Not a valid line — fall through and start fresh from this cell
     }
 
-    // Otherwise start a new drag or anchor selection
+    // Start drag / set new anchor
     isSelecting = true;
     clearSelection();
-    anchorCell = null; // Clear previous anchor if starting new drag
+    anchorCell = null;
     selectCell(cell);
 }
 
