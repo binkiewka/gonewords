@@ -1,896 +1,364 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html class="dark" lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gone Words — Support Hub (UK)</title>
-  <meta name="description"
-    content="A calm, practical, trauma-informed space used to help you find the words. Immediate support, self-care tools, and mindful games." />
-  <meta name="theme-color" content="#0d0b09">
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://gonewords.com/" />
-  <meta property="og:title" content="Gone Words — Support Hub" />
-  <meta property="og:description" content="A calm, practical, trauma-informed space used to help you find the words." />
-  <meta property="og:image" content="https://gonewords.com/social-preview.png" />
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://gonewords.com/" />
-  <meta name="twitter:title" content="Gone Words — Support Hub" />
-  <meta name="twitter:description"
-    content="A calm, practical, trauma-informed space used to help you find the words." />
-  <meta name="twitter:image" content="https://gonewords.com/social-preview.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
-  <style>
-    :root {
-      /* Warm dark palette — amber/brown undertone, not cold blue-black */
-      --bg: #0d0b09;
-      --bg2: #110f0c;
-      --panel: #181410;
-      --panel-2: #1e1a15;
-      --text: #ede8e0;
-      --muted: #9e9488;
-      --accent: #8ec5a4;
-      /* sage — keep */
-      --accent2: #d9c8a2;
-      /* sand — keep */
-      --accent3: #8fb4d9;
-      /* muted blue */
-      --warm: #c4a97d;
-      /* warm amber for accents */
-      --border: #2e2720;
-      /* warm dark border, not cold navy */
-      --border-s: #3d3228;
-      /* slightly lighter for hover */
-      --danger: #c0392b;
-      --focus: #93c5fd;
-    }
-
-    * {
-      box-sizing: border-box
-    }
-
-    html {
-      scroll-behavior: smooth
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      background-color: var(--bg);
-      /* Subtle warm gradient — very gentle */
-      background-image:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(196, 169, 125, 0.06) 0%, transparent 70%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
-      color: var(--text);
-      line-height: 1.65;
-      min-height: 100vh;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none
-    }
-
-    /* ── Layout ─────────────────────────────────────────── */
-    .wrap {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 28px 24px 120px;
-    }
-
-    /* ── Nav ─────────────────────────────────────────────── */
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 16px 24px;
-      margin: -28px -24px 28px -24px;
-      background: rgba(13, 11, 9, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .logo {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 600;
-      font-size: 18px;
-      letter-spacing: 0.12em;
-      color: var(--text);
-      opacity: 0.9;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    /* ── Buttons ─────────────────────────────────────────── */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: 8px;
-      padding: 10px 18px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #0d0b09;
-      font-weight: 700;
-      font-size: 14px;
-      border: none;
-      cursor: pointer;
-      transition: opacity .2s, transform .15s;
-    }
-
-    .btn:hover {
-      opacity: 0.88;
-      transform: translateY(-1px)
-    }
-
-    .btn.ghost {
-      background: transparent;
-      border: 1px solid var(--border-s);
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .btn.ghost:hover {
-      border-color: var(--warm);
-      color: var(--text)
-    }
-
-    .btn.link {
-      background: transparent;
-      border: 1px solid var(--border-s);
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .btn.link:hover {
-      border-color: var(--accent);
-      color: var(--accent)
-    }
-
-    /* ── Hero ────────────────────────────────────────────── */
-    .hero {
-      margin-top: 24px;
-      padding: 56px 40px 52px;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      background:
-        linear-gradient(180deg, rgba(13, 11, 9, .72), rgba(13, 11, 9, .88)),
-        url('hero-bg.png');
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-    }
-
-    /* Warm glow at top of hero */
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -60px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60%;
-      height: 200px;
-      background: radial-gradient(ellipse, rgba(196, 169, 125, 0.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-tag {
-      display: inline-block;
-      border: 1px solid rgba(196, 169, 125, 0.25);
-      background: rgba(196, 169, 125, 0.07);
-      padding: 5px 14px;
-      border-radius: 999px;
-      font-size: 12px;
-      letter-spacing: 0.04em;
-      color: var(--accent2);
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(30px, 4.5vw, 54px);
-      font-weight: 600;
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-      margin: 0 0 18px;
-      text-shadow: 0 2px 20px rgba(0, 0, 0, .5);
-    }
-
-    .hero p {
-      color: var(--muted);
-      font-size: clamp(15px, 1.5vw, 17px);
-      line-height: 1.75;
-      max-width: 520px;
-      margin: 0 auto 24px;
-      text-shadow: 0 1px 8px rgba(0, 0, 0, .3);
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    /* ── Section ─────────────────────────────────────────── */
-    .section {
-      margin-top: 56px;
-    }
-
-    .section-header {
-      margin-bottom: 24px;
-      text-align: center;
-    }
-
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--warm);
-      opacity: 0.8;
-      margin-bottom: 6px;
-    }
-
-    .section-header h2 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(22px, 2.5vw, 30px);
-      font-weight: 600;
-      margin: 0;
-      line-height: 1.25;
-    }
-
-    .section-header p {
-      color: var(--muted);
-      margin: 8px 0 0;
-      font-size: 15px;
-    }
-
-    /* ── Cards ───────────────────────────────────────────── */
-    .grid {
-      display: grid;
-      gap: 14px;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 26px 24px;
-      transition: border-color .25s, background .25s, transform .2s, box-shadow .2s;
-      text-align: center;
-    }
-
-    .card:hover {
-      /* Grow effect instead of lift */
-      transform: scale(1.02);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-      border-color: var(--border-s);
-      /* Subtle border lighten only */
-      z-index: 2;
-      /* Ensure it grows on top of others */
-      position: relative;
-    }
-
-    /* Accent-left card variant */
-    .card.accent-left {
-      border-left: 3px solid var(--accent);
-      padding-left: 22px;
-    }
-
-    .card.accent-warm {
-      border-left: 3px solid var(--warm);
-      padding-left: 22px;
-    }
-
-    .card h3 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 17px;
-      font-weight: 600;
-      margin: 0 0 8px;
-      line-height: 1.3;
-    }
-
-    .card p {
-      margin: 0;
-      font-size: 14px;
-    }
-
-    .card .step-num {
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--warm);
-      opacity: 0.7;
-      margin-bottom: 6px;
-    }
-
-    /* ── Support paths — slightly larger cards ───────────── */
-    .paths-grid {
-      display: grid;
-      gap: 14px;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-
-    .path-card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 30px 26px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: transform .3s ease, box-shadow .3s ease, border-color .25s;
-      text-align: center;
-    }
-
-    .path-card:hover {
-      transform: scale(1.02);
-      box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.6);
-      border-color: var(--border-s);
-      z-index: 2;
-      position: relative;
-    }
-
-    .path-card h3 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 18px;
-      font-weight: 600;
-      margin: 0;
-      text-align: center;
-    }
-
-    .path-card p {
-      color: var(--muted);
-      margin: 0;
-      font-size: 14px;
-      flex: 1;
-      text-align: center;
-    }
-
-    /* ── "What we stand for" — asymmetric ───────────────── */
-    .values-layout {
-      display: grid;
-      gap: 14px;
-      grid-template-columns: 1.4fr 1fr 1fr;
-    }
-
-    .value-card-main {
-      background: var(--panel-2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      text-align: center;
-      min-height: 180px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .value-card-main::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      border-radius: 16px 16px 0 0;
-    }
-
-    .value-card-main .value-quote {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(16px, 1.8vw, 20px);
-      font-style: italic;
-      line-height: 1.5;
-      color: var(--text);
-      margin: 0 0 10px;
-    }
-
-    .value-card-main .value-sub {
-      font-size: 13px;
-      color: var(--muted);
-      margin: 0;
-    }
-
-    .value-card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 22px 20px;
-      transition: border-color .25s;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .value-card:hover {
-      border-color: var(--border-s)
-    }
-
-    .value-card b {
-      display: block;
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .value-card p {
-      color: var(--muted);
-      margin: 0;
-      font-size: 14px;
-    }
-
-    /* ── Explore grid ────────────────────────────────────── */
-    .explore-grid {
-      display: grid;
-      gap: 14px;
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    /* ── Game card ───────────────────────────────────────── */
-    .game-card {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .game-emoji {
-      font-size: 28px;
-      line-height: 1;
-      margin-bottom: 2px;
-    }
-
-    /* ── Divider ─────────────────────────────────────────── */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 56px 0 0;
-      opacity: 0.5;
-    }
-
-    /* ── CTA / collaborate card ──────────────────────────── */
-    .cta-card {
-      margin-top: 56px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 36px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .cta-card h2 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(20px, 2vw, 26px);
-      font-weight: 600;
-      margin: 0 0 8px;
-    }
-
-    .cta-card p {
-      color: var(--muted);
-      margin: 0;
-      font-size: 14px;
-      max-width: 480px;
-    }
-
-    .cta-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      flex-shrink: 0;
-    }
-
-    /* ── Misc ────────────────────────────────────────────── */
-    .muted {
-      color: var(--muted)
-    }
-
-    .inline {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .sr-only {
-      position: absolute;
-      left: -9999px;
-    }
-
-    /* ── Quick exit ──────────────────────────────────────── */
-    .exit {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--danger);
-      color: white;
-      border: none;
-      border-radius: 999px;
-      padding: 10px 16px;
-      font-weight: 700;
-      font-size: 13px;
-      cursor: pointer;
-      z-index: 900;
-      transition: opacity .2s;
-    }
-
-    .exit:hover {
-      opacity: 0.85
-    }
-
-    /* ── Game modal ──────────────────────────────────────── */
-    .game-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: rgba(0, 0, 0, .88);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      opacity: 0;
-      transition: opacity .25s ease;
-    }
-
-    .game-modal.open {
-      display: flex;
-      opacity: 1;
-    }
-
-    .game-modal-inner {
-      position: relative;
-      width: 100%;
-      max-width: 1200px;
-      height: calc(100dvh - 32px);
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      box-shadow: 0 24px 80px rgba(0, 0, 0, .6);
-    }
-
-    .game-modal iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .game-modal-close {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      z-index: 10;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: rgba(13, 11, 9, .85);
-      backdrop-filter: blur(6px);
-      color: var(--text);
-      font-size: 20px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background .2s, border-color .2s;
-    }
-
-    .game-modal-close:hover {
-      background: rgba(30, 26, 21, .95);
-      border-color: var(--accent);
-    }
-
-    /* ── Responsive ──────────────────────────────────────── */
-    @media (max-width: 860px) {
-      .nav {
-        flex-direction: column;
-        align-items: flex-start
-      }
-
-      .values-layout {
-        grid-template-columns: 1fr
-      }
-
-      .explore-grid {
-        grid-template-columns: 1fr
-      }
-
-      .cta-card {
-        flex-direction: column;
-        align-items: flex-start
-      }
-
-      .game-modal {
-        padding: 0
-      }
-
-      .game-modal-inner {
-        height: 100dvh;
-        border-radius: 0;
-        max-width: 100%
-      }
-    }
-
-    @media (max-width: 560px) {
-      .hero {
-        padding: 40px 24px 36px
-      }
-
-      .wrap {
-        padding: 20px 16px 100px
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        scroll-behavior: auto;
-        transition: none;
-        animation: none
-      }
-    }
-  </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gone Words — Support Hub (UK)</title>
+<meta name="description" content="A calm, practical, trauma-informed space used to help you find the words. Immediate support, self-care tools, and mindful games." />
+<meta name="theme-color" content="#0d0b09">
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://gonewords.com/" />
+<meta property="og:title" content="Gone Words — Support Hub" />
+<meta property="og:description" content="A calm, practical, trauma-informed space used to help you find the words." />
+<meta property="og:image" content="https://gonewords.com/social-preview.png" />
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://gonewords.com/" />
+<meta name="twitter:title" content="Gone Words — Support Hub" />
+<meta name="twitter:description" content="A calm, practical, trauma-informed space used to help you find the words." />
+<meta name="twitter:image" content="https://gonewords.com/social-preview.png" />
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8ec5a4",
+                        "secondary": "#d9c8a2",
+                        "accent": "#c4a97d",
+                        "background-light": "#f6f7f7",
+                        "background-dark": "#0d0b09",
+                        "surface-dark": "#1a1612",
+                        "surface-dark-border": "#2d261e",
+                        "danger": "#c0392b"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-nav {
+            background: rgba(13, 11, 9, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(217, 200, 162, 0.1);
+        }
+        /* Game Modal */
+        .game-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, .88);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            transition: opacity .25s ease;
+        }
+        .game-modal.open {
+            display: flex;
+            opacity: 1;
+        }
+        .game-modal-inner {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: calc(100dvh - 32px);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid #2d261e;
+            background: #0d0b09;
+            box-shadow: 0 24px 80px rgba(0,0,0,.6);
+        }
+        .game-modal iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .game-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid #2d261e;
+            background: rgba(13, 11, 9, .85);
+            backdrop-filter: blur(6px);
+            color: #ede8e0;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s, border-color .2s;
+        }
+        .game-modal-close:hover {
+            background: rgba(30, 26, 21, .95);
+            border-color: #8ec5a4;
+        }
+        @media (max-width: 860px) {
+            .game-modal { padding: 0; }
+            .game-modal-inner { height: 100dvh; border-radius: 0; max-width: 100%; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none; animation: none; }
+        }
+    </style>
 </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen flex flex-col relative group/design-root overflow-x-hidden">
 
-<body>
-  <div class="wrap">
-
-    <!-- Nav -->
-    <nav class="nav" aria-label="Main navigation">
-      <div class="logo">Gone Words</div>
-      <div class="nav-links">
-        <a class="btn ghost" href="#start">Start here</a>
-        <a class="btn ghost" href="#paths">Support paths</a>
-        <a class="btn ghost" href="#games">Games</a>
-      </div>
-    </nav>
-
-    <!-- Hero -->
-    <div class="hero" id="start">
-      <div class="hero-tag">Anxiety &bull; PTSD &bull; ADHD &bull; Alcohol support</div>
-      <h1>When the words go,<br>let's find them together.</h1>
-      <p>Quiet the noise and untangle the weight of the day. Whether you need immediate safety or a small moment of
-        calm, we're here to help you reconnect.</p>
-      <div class="hero-actions">
-        <a class="btn" href="help.html">Need help right now</a>
-        <a class="btn ghost" href="tools.html">Self&#x2011;support tools</a>
-        <a class="btn ghost" href="services.html">Find local services</a>
-      </div>
-    </div>
-
-    <!-- Support paths -->
-    <div class="section" id="paths">
-      <div class="section-header">
-        <div class="section-label">Where to start</div>
-        <h2>Support paths</h2>
-      </div>
-      <div class="paths-grid">
-        <div class="path-card">
-          <div class="step-num">Step 1</div>
-          <h3>Immediate support</h3>
-          <p class="muted">Crisis lines, text support, and urgent help — when you need someone right now.</p>
-          <a class="btn link" href="help.html">Go to urgent help &#x2192;</a>
-        </div>
-        <div class="path-card">
-          <div class="step-num">Step 2</div>
-          <h3>Self&#x2011;support</h3>
-          <p class="muted">Grounding, micro&#x2011;steps, and daily stabilisers you can use on your own.</p>
-          <a class="btn link" href="tools.html">Go to self&#x2011;support &#x2192;</a>
-        </div>
-        <div class="path-card">
-          <div class="step-num">Step 3</div>
-          <h3>Ongoing care</h3>
-          <p class="muted">NHS services, therapies, and support organisations for the longer journey.</p>
-          <a class="btn link" href="services.html">Go to care options &#x2192;</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- What we stand for — asymmetric layout -->
-    <div class="section">
-      <div class="section-header">
-        <div class="section-label">Our approach</div>
-        <h2>What we stand for</h2>
-      </div>
-      <div class="values-layout">
-        <div class="value-card-main">
-          <p class="value-quote">"A calm, practical, trauma&#x2011;informed space — built by people who've been there."
-          </p>
-          <p class="value-sub">No pressure. No jargon. Just honest help.</p>
-        </div>
-        <div class="value-card">
-          <b>Calm by design</b>
-          <p>Low&#x2011;stim visuals, clear steps, and no pressure to perform.</p>
-        </div>
-        <div class="value-card">
-          <b>Safety first</b>
-          <p>Clear crisis routes and harm&#x2011;aware community spaces.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Explore -->
-    <div class="section">
-      <div class="section-header">
-        <div class="section-label">Find your way</div>
-        <h2>Explore</h2>
-      </div>
-      <div class="explore-grid">
-        <div class="card accent-left">
-          <h3>Safety &amp; urgent help</h3>
-          <p class="muted">Phone, text, and what to do in an emergency.</p>
-          <div style="margin-top:14px">
-            <a class="btn link" href="help.html">Open &#x2192;</a>
-          </div>
-        </div>
-        <div class="card accent-left">
-          <h3>Self&#x2011;support tools</h3>
-          <p class="muted">Grounding, micro&#x2011;steps, and a GP script.</p>
-          <div style="margin-top:14px">
-            <a class="btn link" href="tools.html">Open &#x2192;</a>
-          </div>
-        </div>
-        <div class="card accent-warm">
-          <h3>Find services</h3>
-          <p class="muted">NHS Talking Therapies and local support.</p>
-          <div style="margin-top:14px">
-            <a class="btn link" href="services.html">Open &#x2192;</a>
-          </div>
-        </div>
-        <div class="card accent-warm">
-          <h3>Lived experience stories</h3>
-          <p class="muted">Read or share stories, safely and anonymously.</p>
-          <div style="margin-top:14px">
-            <a class="btn link" href="stories.html">Open &#x2192;</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mind games -->
-    <div class="section" id="games">
-      <div class="section-header">
-        <div class="section-label">Take a moment</div>
-        <h2>Mind games</h2>
-        <p>Relaxing games to help your mind unwind. No timers, no pressure.</p>
-      </div>
-      <div class="grid">
-        <div class="card game-card">
-          <div class="game-emoji">&#x1F9F6;</div>
-          <h3>Untangle Your Mind</h3>
-          <p class="muted">A mindful puzzle &#x2014; drag nodes to untangle the lines. Just focus.</p>
-          <div style="margin-top:6px">
-            <button class="btn link" data-game="games/untangle_your_mind/index.html">Play &#x2192;</button>
-          </div>
-        </div>
-        <div class="card game-card">
-          <div class="game-emoji">&#x1F50D;</div>
-          <h3>Find the Word</h3>
-          <p class="muted">A gentle word search to help you focus. Look for calm.</p>
-          <div style="margin-top:6px">
-            <button class="btn link" data-game="games/find_the_word/index.html">Play &#x2192;</button>
-          </div>
-        </div>
-        <div class="card game-card">
-          <div class="game-emoji">💧</div>
-          <h3>Pattern Ripple</h3>
-          <p class="muted">A meditative intersection puzzle. Tap to create ripples and match the calming pattern.</p>
-          <div style="margin-top:6px">
-            <button class="btn link" data-game="games/pattern_ripple/index.html">Play &#x2192;</button>
-          </div>
-        </div>
-        <div class="card game-card">
-          <div class="game-emoji">&#x1F522;</div>
-          <h3>Numbers Game</h3>
-          <p class="muted">A reassuring calculation challenge. Combine numbers to find the exact target.</p>
-          <div style="margin-top:6px">
-            <button class="btn link" data-game="games/countdown/index.html">Play &#x2192;</button>
-          </div>
-        </div>
-        <div class="card game-card">
-          <div class="game-emoji">&#x1F33F;</div>
-          <h3>Garden Connect</h3>
-          <p class="muted">A calm flow puzzle. Rotate tiles to connect the water and let the plants bloom.</p>
-          <div style="margin-top:6px">
-            <button class="btn link" data-game="games/garden_connect/index.html">Play &#x2192;</button>
-          </div>
-        </div>
-        <div class="card game-card">
-          <div class="game-emoji">&#x1F33F;</div>
-          <h3>Garden Breath Sudoku</h3>
-          <p class="muted">A calm number puzzle. Paced by your breathing, watch the garden bloom.</p>
-          <div style="margin-top:6px">
-            <button class="btn link" data-game="games/sudoku/index.html">Play &#x2192;</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CTA -->
-    <div class="cta-card">
-      <div>
-        <h2>Want to help build this?</h2>
-        <p>We're building a calm, practical, trauma&#x2011;informed space. If you have ideas or want to collaborate,
-          reach out.</p>
-      </div>
-      <div class="cta-actions">
-        <a class="btn" href="mailto:hello@gonewords.com">Email us</a>
-        <a class="btn ghost" href="stories.html">Share a story</a>
-      </div>
-    </div>
-
-  </div><!-- /wrap -->
-
-  <!-- Game modal -->
-  <div class="game-modal" id="game-modal" role="dialog" aria-modal="true" aria-label="Game">
+<!-- Game Modal -->
+<div class="game-modal" id="game-modal" role="dialog" aria-modal="true" aria-label="Mind game">
     <div class="game-modal-inner">
-      <button class="game-modal-close" id="modal-close" title="Close game">&#x2715;</button>
-      <iframe id="game-iframe" title="Game"></iframe>
+        <button class="game-modal-close" id="game-modal-close" aria-label="Close game">✕</button>
+        <iframe id="game-modal-iframe" src="" title="Mind game"></iframe>
     </div>
-  </div>
+</div>
 
-  <!-- Quick exit -->
-  <button class="exit" onclick="window.location.href='https://www.google.com'">Quick exit</button>
+<!-- Fixed Quick Exit -->
+<a class="fixed bottom-6 right-6 z-50 bg-danger text-white px-6 py-3 rounded-full font-bold shadow-lg hover:bg-danger/80 transition-colors flex items-center gap-2" href="https://google.com">
+<span class="material-symbols-outlined">logout</span>
+        Quick Exit
+    </a>
+<!-- Sticky Nav -->
+<header class="fixed top-0 w-full z-40 glass-nav px-8 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">psychology</span>
+<span class="font-serif text-2xl font-bold tracking-widest text-slate-100">GONE WORDS</span>
+</div>
+<nav class="flex gap-4" aria-label="Main navigation">
+<a class="px-5 py-2 rounded-full border border-slate-700 hover:bg-surface-dark transition-colors text-sm font-medium" href="#start">Start here</a>
+<a class="px-5 py-2 rounded-full border border-slate-700 hover:bg-surface-dark transition-colors text-sm font-medium" href="#paths">Support paths</a>
+<a class="px-5 py-2 rounded-full border border-slate-700 hover:bg-surface-dark transition-colors text-sm font-medium" href="#games">Games</a>
+</nav>
+</header>
+<main class="flex-1 pt-24 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto w-full flex flex-col gap-16 pb-24">
+<!-- Hero Section -->
+<section class="relative w-full rounded-xl overflow-hidden min-h-[500px] flex flex-col items-center justify-center p-8 md:p-16 text-center" id="start" style="background-image: linear-gradient(to bottom, rgba(13, 11, 9, 0.4), rgba(13, 11, 9, 0.8)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuAZkr_2OChs1j8gOREhOg90RrHUXElJAKBNpc0BN8-jNEu7KhgztRMxMyNZujPvNlQ15_WKTD618qdhGuw-8evCwgrlIU6qhbEc_pwykpjrl4Dkflhk_KaQgzt-z6TAGnPG4rkE8cRYCcAI3K-G8n3AwYC3dgtqhG8pdDuLqcQ5vqYTxMoPH4bgUXtfBlowbPmkPyWMpZb4Lgr4T6R85k8V0sO5iDILpIzkKpsZv32hWPrmkoYSRL3MjP24XToUcA-_WW7egVQhlDo'); background-size: cover; background-position: center;">
+<p class="text-secondary font-medium tracking-wide mb-6 text-sm md:text-base uppercase">
+                Anxiety • PTSD • ADHD • Alcohol support
+            </p>
+<h1 class="font-serif text-4xl md:text-6xl font-bold text-slate-100 mb-10 max-w-4xl leading-tight">
+                When the words go, let's find them together.
+            </h1>
+<p class="text-slate-300 max-w-xl mb-8 text-base md:text-lg">Quiet the noise and untangle the weight of the day. Whether you need immediate safety or a small moment of calm, we're here to help you reconnect.</p>
+<div class="flex flex-wrap items-center justify-center gap-4 w-full max-w-2xl">
+<a class="bg-primary text-background-dark px-8 py-4 rounded-full font-bold text-lg hover:bg-primary/90 transition-colors w-full md:w-auto shadow-[0_0_20px_rgba(142,197,164,0.3)]" href="help.html">
+                    Need help right now
+                </a>
+<a class="bg-surface-dark/50 backdrop-blur border border-surface-dark-border px-6 py-4 rounded-full font-medium hover:bg-surface-dark transition-colors w-full md:w-auto" href="tools.html">
+                    Self-support tools
+                </a>
+<a class="bg-surface-dark/50 backdrop-blur border border-surface-dark-border px-6 py-4 rounded-full font-medium hover:bg-surface-dark transition-colors w-full md:w-auto" href="services.html">
+                    Find local services
+                </a>
+</div>
+</section>
+<!-- Support Paths -->
+<section class="flex flex-col gap-8" id="paths">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<p class="text-xs tracking-widest uppercase text-accent opacity-80 mb-1">Where to start</p>
+<h2 class="font-serif text-3xl font-bold text-slate-100 mb-2">Support Paths</h2>
+<p class="text-slate-400">Find the right path for your journey.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Step 1 -->
+<div class="bg-surface-dark border-t-4 border-t-accent rounded-b-lg rounded-tl-lg p-8 flex flex-col gap-4 hover:bg-surface-dark/80 transition-colors">
+<span class="material-symbols-outlined text-accent text-3xl">favorite</span>
+<div>
+<p class="text-xs tracking-widest uppercase text-accent opacity-70 mb-1">Step 1</p>
+<h3 class="text-xl font-bold mb-1">Immediate support</h3>
+<p class="text-slate-400 text-sm">Crisis lines, text support, and urgent help — when you need someone right now.</p>
+</div>
+<a class="text-accent font-medium mt-auto flex items-center gap-1 hover:gap-2 transition-all" href="help.html">
+                        Go to urgent help <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-dark border-t-4 border-t-secondary rounded-b-lg rounded-tl-lg p-8 flex flex-col gap-4 hover:bg-surface-dark/80 transition-colors">
+<span class="material-symbols-outlined text-secondary text-3xl">menu_book</span>
+<div>
+<p class="text-xs tracking-widest uppercase text-secondary opacity-70 mb-1">Step 2</p>
+<h3 class="text-xl font-bold mb-1">Self-support</h3>
+<p class="text-slate-400 text-sm">Grounding, micro‑steps, and daily stabilisers you can use on your own.</p>
+</div>
+<a class="text-secondary font-medium mt-auto flex items-center gap-1 hover:gap-2 transition-all" href="tools.html">
+                        Go to self‑support <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface-dark border-t-4 border-t-primary rounded-b-lg rounded-tl-lg p-8 flex flex-col gap-4 hover:bg-surface-dark/80 transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">trending_up</span>
+<div>
+<p class="text-xs tracking-widest uppercase text-primary opacity-70 mb-1">Step 3</p>
+<h3 class="text-xl font-bold mb-1">Ongoing care</h3>
+<p class="text-slate-400 text-sm">NHS services, therapies, and support organisations for the longer journey.</p>
+</div>
+<a class="text-primary font-medium mt-auto flex items-center gap-1 hover:gap-2 transition-all" href="services.html">
+                        Go to care options <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- What we stand for -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="bg-surface-dark rounded-xl p-10 flex flex-col justify-center min-h-[300px] border border-surface-dark-border relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+<p class="text-xs tracking-widest uppercase text-accent opacity-80 mb-3">Our approach</p>
+<h2 class="font-serif text-secondary text-lg mb-4">What we stand for</h2>
+<p class="font-serif text-2xl md:text-3xl italic text-slate-100 leading-relaxed z-10">
+                    "A calm, practical, trauma‑informed space — built by people who've been there."
+                </p>
+<p class="text-slate-400 mt-4 text-sm">No pressure. No jargon. Just honest help.</p>
+</div>
+<div class="grid grid-rows-2 gap-6">
+<div class="bg-surface-dark rounded-xl p-8 flex items-center gap-6 border border-surface-dark-border">
+<div class="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-accent text-2xl">water_drop</span>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-2">Calm by design</h3>
+<p class="text-slate-400 text-sm">Low‑stim visuals, clear steps, and no pressure to perform.</p>
+</div>
+</div>
+<div class="bg-surface-dark rounded-xl p-8 flex items-center gap-6 border border-surface-dark-border">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-2xl">shield</span>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-2">Safety first</h3>
+<p class="text-slate-400 text-sm">Clear crisis routes and harm‑aware community spaces.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Explore -->
+<section class="flex flex-col gap-6">
+<div>
+<p class="text-xs tracking-widest uppercase text-accent opacity-80 mb-1">Find your way</p>
+<h2 class="font-serif text-3xl font-bold text-slate-100">Explore</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<a href="help.html" class="bg-surface-dark border-l-4 border-l-primary rounded-r-lg rounded-bl-lg p-6 flex flex-col gap-3 hover:bg-surface-dark/70 transition-colors">
+<span class="material-symbols-outlined text-slate-300">medical_services</span>
+<h3 class="font-bold text-lg">Safety &amp; urgent help</h3>
+<p class="text-sm text-slate-400 mt-auto">Phone, text, and what to do in an emergency.</p>
+</a>
+<a href="tools.html" class="bg-surface-dark border-l-4 border-l-accent rounded-r-lg rounded-bl-lg p-6 flex flex-col gap-3 hover:bg-surface-dark/70 transition-colors">
+<span class="material-symbols-outlined text-slate-300">build</span>
+<h3 class="font-bold text-lg">Self-support tools</h3>
+<p class="text-sm text-slate-400 mt-auto">Grounding, micro‑steps, and a GP script.</p>
+</a>
+<a href="services.html" class="bg-surface-dark border-l-4 border-l-secondary rounded-r-lg rounded-bl-lg p-6 flex flex-col gap-3 hover:bg-surface-dark/70 transition-colors">
+<span class="material-symbols-outlined text-slate-300">location_on</span>
+<h3 class="font-bold text-lg">Find services</h3>
+<p class="text-sm text-slate-400 mt-auto">NHS Talking Therapies and local support.</p>
+</a>
+<a href="stories.html" class="bg-surface-dark border-l-4 border-l-primary rounded-r-lg rounded-bl-lg p-6 flex flex-col gap-3 hover:bg-surface-dark/70 transition-colors">
+<span class="material-symbols-outlined text-slate-300">group</span>
+<h3 class="font-bold text-lg">Lived experience</h3>
+<p class="text-sm text-slate-400 mt-auto">Read or share stories, safely and anonymously.</p>
+</a>
+</div>
+</section>
+<!-- Mind Games -->
+<section class="flex flex-col gap-8 pt-8 border-t border-surface-dark-border" id="games">
+<div>
+<p class="text-xs tracking-widest uppercase text-accent opacity-80 mb-1">Take a moment</p>
+<h2 class="font-serif text-3xl font-bold text-slate-100 mb-2">Mind Games</h2>
+<p class="text-slate-400">Relaxing games to help your mind unwind. No timers, no pressure.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Game 1 -->
+<div class="group relative overflow-hidden rounded-xl bg-surface-dark border border-surface-dark-border cursor-pointer" data-game="games/untangle_your_mind/index.html" role="button" tabindex="0" aria-label="Play Untangle Your Mind">
+<div class="p-8 flex flex-col gap-4 relative z-10">
+<span class="text-4xl">🧶</span>
+<div class="w-12 h-12 rounded-full bg-white/10 backdrop-blur flex items-center justify-center group-hover:bg-primary/80 group-hover:text-background-dark transition-colors">
+<span class="material-symbols-outlined">play_arrow</span>
+</div>
+<h3 class="text-lg font-bold">Untangle Your Mind</h3>
+<p class="text-slate-400 text-sm">A mindful puzzle — drag nodes to untangle the lines. Just focus.</p>
+</div>
+</div>
+<!-- Game 2 -->
+<div class="group relative overflow-hidden rounded-xl bg-surface-dark border border-surface-dark-border cursor-pointer" data-game="games/find_the_word/index.html" role="button" tabindex="0" aria-label="Play Find the Word">
+<div class="p-8 flex flex-col gap-4 relative z-10">
+<span class="text-4xl">🔍</span>
+<div class="w-12 h-12 rounded-full bg-white/10 backdrop-blur flex items-center justify-center group-hover:bg-accent/80 group-hover:text-background-dark transition-colors">
+<span class="material-symbols-outlined">play_arrow</span>
+</div>
+<h3 class="text-lg font-bold">Find the Word</h3>
+<p class="text-slate-400 text-sm">A gentle word search to help you focus. Look for calm.</p>
+</div>
+</div>
+<!-- Game 3 -->
+<div class="group relative overflow-hidden rounded-xl bg-surface-dark border border-surface-dark-border cursor-pointer" data-game="games/sound_memory/index.html" role="button" tabindex="0" aria-label="Play Sound Memory">
+<div class="p-8 flex flex-col gap-4 relative z-10">
+<span class="text-4xl">🎵</span>
+<div class="w-12 h-12 rounded-full bg-white/10 backdrop-blur flex items-center justify-center group-hover:bg-secondary/80 group-hover:text-background-dark transition-colors">
+<span class="material-symbols-outlined">play_arrow</span>
+</div>
+<h3 class="text-lg font-bold">Sound Memory</h3>
+<p class="text-slate-400 text-sm">Match gentle sounds to calm and focus your mind.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
 
-  <script>
+<script>
     // Game modal
     const modal = document.getElementById('game-modal');
-    const iframe = document.getElementById('game-iframe');
-    const closeBtn = document.getElementById('modal-close');
+    const iframe = document.getElementById('game-modal-iframe');
+    const closeBtn = document.getElementById('game-modal-close');
 
-    function openGame(src) {
-      iframe.src = src;
-      modal.style.display = 'flex';
-      requestAnimationFrame(() => modal.classList.add('open'));
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeGame() {
-      modal.classList.remove('open');
-      document.body.style.overflow = '';
-      setTimeout(() => { modal.style.display = 'none'; iframe.src = ''; }, 250);
-    }
-
-    document.querySelectorAll('[data-game]').forEach(btn =>
-      btn.addEventListener('click', () => openGame(btn.dataset.game))
-    );
-    closeBtn.addEventListener('click', closeGame);
-    modal.addEventListener('click', e => { if (e.target === modal) closeGame(); });
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && modal.classList.contains('open')) closeGame();
+    document.querySelectorAll('[data-game]').forEach(card => {
+        card.addEventListener('click', () => {
+            iframe.src = card.dataset.game;
+            modal.classList.add('open');
+        });
+        card.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                iframe.src = card.dataset.game;
+                modal.classList.add('open');
+            }
+        });
     });
-  </script>
-</body>
 
-</html>
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('open');
+        setTimeout(() => { iframe.src = ''; }, 300);
+    });
+
+    modal.addEventListener('click', e => {
+        if (e.target === modal) {
+            modal.classList.remove('open');
+            setTimeout(() => { iframe.src = ''; }, 300);
+        }
+    });
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
+            modal.classList.remove('open');
+            setTimeout(() => { iframe.src = ''; }, 300);
+        }
+    });
+</script>
+</body></html>

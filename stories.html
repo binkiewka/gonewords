@@ -1,345 +1,155 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gone Words — Lived Experience</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0d0b09;
-      --bg2: #110f0c;
-      --panel: #181410;
-      --panel-2: #1e1a15;
-      --text: #ede8e0;
-      --muted: #9e9488;
-      --accent: #8ec5a4;
-      --accent2: #d9c8a2;
-      --accent3: #8fb4d9;
-      --warm: #c4a97d;
-      --border: #2e2720;
-      --border-s: #3d3228;
-      --danger: #c0392b;
-    }
-
-    * {
-      box-sizing: border-box
-    }
-
-    html {
-      scroll-behavior: smooth
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background-color: var(--bg);
-      background-image:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(196, 169, 125, 0.06) 0%, transparent 70%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
-      color: var(--text);
-      line-height: 1.65;
-      min-height: 100vh;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none
-    }
-
-    .wrap {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 28px 24px 120px
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .logo {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 600;
-      font-size: 18px;
-      letter-spacing: 0.12em;
-      opacity: 0.9;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: 8px;
-      padding: 10px 18px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #0d0b09;
-      font-weight: 700;
-      font-size: 14px;
-      border: none;
-      cursor: pointer;
-      transition: opacity .2s, transform .15s;
-    }
-
-    .btn:hover {
-      opacity: 0.88;
-      transform: translateY(-1px)
-    }
-
-    .btn.ghost {
-      background: transparent;
-      border: 1px solid var(--border-s);
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .btn.ghost:hover {
-      border-color: var(--warm);
-      color: var(--text)
-    }
-
-    .btn.link {
-      background: transparent;
-      border: 1px solid var(--border-s);
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .btn.link:hover {
-      border-color: var(--accent);
-      color: var(--accent)
-    }
-
-    .page-header {
-      margin-top: 32px;
-      padding: 36px 32px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      border-left: 3px solid var(--accent2);
-      text-align: center;
-    }
-
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--warm);
-      opacity: 0.8;
-      margin-bottom: 8px;
-      text-align: center;
-    }
-
-    .page-header h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(24px, 3vw, 34px);
-      font-weight: 600;
-      margin: 0 0 10px;
-      line-height: 1.2;
-    }
-
-    .page-header p {
-      color: var(--muted);
-      margin: 0;
-      font-size: 15px
-    }
-
-    .section {
-      margin-top: 40px
-    }
-
-    .section h2 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(20px, 2.2vw, 26px);
-      font-weight: 600;
-      margin: 0 0 20px;
-      text-align: center;
-    }
-
-    .grid {
-      display: grid;
-      gap: 14px;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px 26px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: border-color .25s, background .25s;
-      text-align: center;
-    }
-
-    .card:hover {
-      border-color: var(--border-s);
-      background: var(--panel-2)
-    }
-
-    .card.accent-left {
-      border-left: 3px solid var(--accent);
-      padding-left: 22px
-    }
-
-    .card.accent-sand {
-      border-left: 3px solid var(--accent2);
-      padding-left: 22px
-    }
-
-    .card b {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 17px;
-      font-weight: 600;
-    }
-
-    .card p {
-      margin: 0;
-      font-size: 14px;
-      color: var(--muted);
-      flex: 1
-    }
-
-    /* Safety card */
-    .safety-card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 26px 24px;
-    }
-
-    .safety-card h2 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(18px, 2vw, 22px);
-      font-weight: 600;
-      margin: 0 0 14px;
-    }
-
-    .safety-card ul {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .safety-card ul li {
-      margin: 8px 0;
-      line-height: 1.6
-    }
-
-    .muted {
-      color: var(--muted)
-    }
-
-    .exit {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--danger);
-      color: white;
-      border: none;
-      border-radius: 999px;
-      padding: 10px 16px;
-      font-weight: 700;
-      font-size: 13px;
-      cursor: pointer;
-      z-index: 900;
-      transition: opacity .2s;
-    }
-
-    .exit:hover {
-      opacity: 0.85
-    }
-
-    @media (max-width: 860px) {
-      .nav {
-        flex-direction: column;
-        align-items: flex-start
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lived Experience Stories Hub - Gone Words</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#d9c7a1",
+              "background-light": "#f7f7f6",
+              "background-dark": "#1d1b15",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"],
+              "serif": ["Playfair Display", "serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
       }
-    }
-
-    @media (max-width: 560px) {
-      .wrap {
-        padding: 20px 16px 100px
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        transition: none;
-        animation: none
-      }
-    }
-  </style>
+    </script>
 </head>
-
-<body>
-  <div class="wrap">
-
-    <nav class="nav" aria-label="Main navigation">
-      <div class="logo">Gone Words</div>
-      <div class="nav-links">
-        <a class="btn ghost" href="index.html">← Back</a>
-      </div>
-    </nav>
-
-    <div class="page-header">
-      <div class="section-label">You're not alone</div>
-      <h1>Lived experience stories</h1>
-      <p>Stories help people feel less alone. We keep sharing safe, consent&#x2011;first, and anonymous when needed.</p>
-    </div>
-
-    <div class="section">
-      <div class="section-label">Get involved</div>
-      <h2>Share or read</h2>
-      <div class="grid">
-        <div class="card accent-left">
-          <b>Share your story</b>
-          <p>We'll add a guided form with optional anonymity and content warnings. For now, email us.</p>
-          <a class="btn link" href="mailto:hello@gonewords.com">Email us &#x2192;</a>
-        </div>
-        <div class="card accent-sand">
-          <b>Read stories</b>
-          <p>We'll add filters for identity and context so you can find stories like yours.</p>
-          <a class="btn link" href="index.html">Back to hub &#x2192;</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="safety-card">
-        <h2>Safety &amp; consent</h2>
-        <ul>
-          <li>Content warnings on all sensitive topics.</li>
-          <li>No graphic detail — focus on recovery and support.</li>
-          <li>Anonymous options and clear data boundaries.</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-
-  <button class="exit" onclick="window.location.href='https://www.google.com'">Quick exit</button>
-
-  
-</body>
-
-</html>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen flex flex-col antialiased selection:bg-primary/30">
+<!-- Sticky Navigation -->
+<header class="sticky top-0 z-40 w-full border-b border-primary/20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">spa</span>
+<span class="font-serif text-2xl font-semibold tracking-wide text-primary">Gone Words</span>
+</div>
+<a class="flex items-center gap-2 px-5 py-2.5 rounded-full hover:bg-primary/10 transition-colors text-sm font-semibold tracking-wide" href="index.html">
+<span class="material-symbols-outlined text-base">arrow_back</span>
+                Back
+            </a>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-[900px] mx-auto px-6 py-12 md:py-20 flex flex-col gap-16">
+<!-- Page Header -->
+<section class="border-l-[6px] border-primary bg-primary/5 pl-8 pr-6 py-10 rounded-r-2xl rounded-l-sm shadow-sm relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent pointer-events-none"></div>
+<div class="relative z-10">
+<span class="inline-block px-3 py-1 bg-primary/20 text-primary font-semibold text-xs tracking-widest uppercase rounded-full mb-6">
+                    You're not alone
+                </span>
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-semibold text-slate-900 dark:text-white leading-tight mb-6">
+                    Lived experience stories
+                </h1>
+<p class="text-lg md:text-xl text-slate-700 dark:text-slate-300 max-w-2xl leading-relaxed">
+                    Stories help people feel less alone. We keep sharing safe, consent‑first, and anonymous when needed.
+                </p>
+</div>
+</section>
+<!-- Get Involved Section -->
+<section class="flex flex-col gap-8">
+<div>
+<span class="text-primary font-medium tracking-widest text-sm uppercase">Get involved</span>
+<h2 class="text-3xl font-serif font-semibold mt-3 text-slate-900 dark:text-white">Share or read</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Share Card -->
+<div class="border-l-4 border-emerald-500 bg-white dark:bg-white/5 p-8 rounded-r-2xl rounded-l-sm flex flex-col shadow-sm transition-transform hover:-translate-y-1 duration-300">
+<div class="flex-1">
+<div class="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-emerald-500 text-xl">edit_document</span>
+</div>
+<h3 class="text-2xl font-serif font-semibold mb-3 text-slate-900 dark:text-white">Share your story</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
+                            We’ll add a guided form with optional anonymity and content warnings. For now, email us.
+                        </p>
+</div>
+<a class="w-fit px-6 py-3 bg-primary text-background-dark text-sm font-bold rounded-full hover:bg-primary/90 transition-colors flex items-center gap-2 shadow-sm" href="mailto:hello@gonewords.com">
+                        Email us <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Read Card -->
+<div class="border-l-4 border-primary bg-white dark:bg-white/5 p-8 rounded-r-2xl rounded-l-sm flex flex-col shadow-sm transition-transform hover:-translate-y-1 duration-300">
+<div class="flex-1">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-xl">menu_book</span>
+</div>
+<h3 class="text-2xl font-serif font-semibold mb-3 text-slate-900 dark:text-white">Read stories</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
+                            We’ll add filters for identity and context so you can find stories like yours.
+                        </p>
+</div>
+<a class="w-fit px-6 py-3 border-2 border-primary text-primary text-sm font-bold rounded-full hover:bg-primary/10 transition-colors flex items-center gap-2" href="index.html">
+                        Back to hub <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Placeholder Story -->
+<section class="bg-white dark:bg-[#23211a] rounded-3xl p-8 md:p-10 shadow-sm border border-black/5 dark:border-white/5 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-500 via-primary to-amber-500 opacity-70"></div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center border border-slate-200 dark:border-white/10">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500 text-2xl">person</span>
+</div>
+<div>
+<div class="font-serif text-lg font-semibold text-slate-900 dark:text-white">Anonymous Author</div>
+<div class="text-sm text-slate-500 dark:text-slate-400 mt-1">Shared today</div>
+</div>
+</div>
+<span class="inline-flex items-center px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold tracking-wide border border-emerald-500/20 w-fit">
+                    Recovery
+                </span>
+</div>
+<blockquote class="text-xl md:text-2xl font-serif text-slate-700 dark:text-slate-300 italic leading-relaxed mb-8">
+                "Finding the words was the hardest part, but once I did, the weight started to lift. It took time, and that’s okay..."
+            </blockquote>
+<a class="inline-flex items-center gap-2 text-primary font-bold hover:text-primary/80 transition-colors group-hover:gap-3 duration-300" href="#">
+                Read more <span class="material-symbols-outlined text-base">east</span>
+</a>
+</section>
+<!-- Safety & Consent Info Card -->
+<section class="border border-amber-500/30 bg-amber-500/5 p-8 md:p-10 rounded-3xl relative overflow-hidden">
+<div class="absolute -right-10 -top-10 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-center gap-4 mb-8">
+<div class="w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-amber-600 dark:text-amber-500">security</span>
+</div>
+<h2 class="text-2xl md:text-3xl font-serif font-semibold text-slate-900 dark:text-white">Safety &amp; consent</h2>
+</div>
+<ul class="space-y-5">
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-amber-600 dark:text-amber-500 mt-0.5 text-xl shrink-0">check_circle</span>
+<span class="text-slate-700 dark:text-slate-300 leading-relaxed text-lg">Content warnings on all sensitive topics</span>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-amber-600 dark:text-amber-500 mt-0.5 text-xl shrink-0">check_circle</span>
+<span class="text-slate-700 dark:text-slate-300 leading-relaxed text-lg">No graphic detail — focus on recovery and support</span>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-amber-600 dark:text-amber-500 mt-0.5 text-xl shrink-0">check_circle</span>
+<span class="text-slate-700 dark:text-slate-300 leading-relaxed text-lg">Anonymous options and clear data boundaries</span>
+</li>
+</ul>
+</section>
+</main>
+<!-- Persistent Quick Exit Button -->
+<a class="fixed bottom-8 right-8 bg-rose-600 hover:bg-rose-700 text-white px-6 py-3.5 rounded-full font-bold shadow-xl flex items-center gap-2 z-50 transition-transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-rose-600/30" href="https://www.google.com">
+        Quick exit
+        <span class="material-symbols-outlined text-lg">logout</span>
+</a>
+</body></html>
